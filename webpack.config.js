@@ -7,7 +7,6 @@ const extractCSS = new ExtractTextPlugin('./styles/style.css');
 
 module.exports = {
   mode: 'none',
-  devtool: 'source-map',
   entry: path.join(__dirname, './source/index.js'),
   output: {
     filename: './js/match-match-game.js',
@@ -27,6 +26,12 @@ module.exports = {
         use: extractCSS.extract([ 
           'css-loader' 
         ])
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          'file-loader?name=images/[name].[ext]'
+        ]
       }
 		]
 	}
