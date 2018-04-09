@@ -5,13 +5,45 @@
     <title>match-match game</title>
 </head>
 <body>
-    <div class="match-match-game">
+    <div class="match-match-game hard">
         <div class="control">
             <button id="menu">menu</button>
             <button id="reload">restart</button>
             <div class="timer">00:00:00</div>
         </div>
         <div class="playing-field"></div>
+        <div class="menu-wrapper">
+            <div class="menu">
+                <div class="menu-control">
+                    <button>Resume</button>
+                    <button>New game</button><br />
+                    <button>Change card back</button>
+                    <button>Change difficulty</button>
+                </div>
+                <div class="description">
+                    <p>Rules</p>
+                    <ul>
+                        <li>When the game starts, all cards are hidden</li>
+                        <li>Your task is to find all the matchs, choosing two cards per turn</li>
+                        <li>If the selected cards do not match, they are flipped back</li>
+                        <li>Enjoy!</li>
+                    </ul>
+                    <p>Control: mouse</p>
+                </div>
+                <div class="card-back"></div>
+                <div class="difficulty">
+                    <p>Attention!<br />If the difficulty is changed, you will not be able to continue the game!</p>
+                    <div class="radio">
+                        <input id="easy" type="radio" name="difficulty" value="easy">
+                        <label for="easy">Easy (4x3)</label>
+                        <input id="medium" type="radio" name="difficulty" value="average">
+                        <label for="medium">Average (6x3)</label>
+                        <input id="hard" type="radio" name="difficulty" value="hard">
+                        <label for="hard">Hard (6x4)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
