@@ -31,6 +31,7 @@ const config = {
 }
 
 const gameField = new ControlGameField(config);
+const random = new SelectRandomCards(config.defaultCardsArray);
 
 const callbackControlButtons = (flag, arg) => {
   switch (flag) {
@@ -38,16 +39,18 @@ const callbackControlButtons = (flag, arg) => {
       gameField.setCardBack(arg);
       break;
     case 'changeDifficulty':
+      config.level = arg;
       gameField.setLevel(arg);
       break;
     case 'newGame':
-      gameField.createNewGame();
+      random.setLevel(config.level);
+      gameField.createNewGame(random.getCardsArray());
       break;
-    case 'LeaveGame':
-      gameField.createNewGame();
+    case 'leaveGame':
+      gameField.leaveGame();
       break;
     case 'restart':
-      gameField.createNewGame();
+      gameField.createNewGame(random.getCardsArray());
       break;
     default:
       break;
@@ -55,10 +58,3 @@ const callbackControlButtons = (flag, arg) => {
 }
 
 const menu = new ControlButtons(config.cardBackArray, callbackControlButtons);
-
-/*const random = new SelectRandomCards(config.defaultCardsArray);
-random.setLevel(config.level);
-const cardsArray = random.getCardsArray();
-
-
-const playingField = document.getElementsByClassName('playing-field')[0];*/

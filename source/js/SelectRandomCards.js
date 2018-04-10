@@ -1,20 +1,19 @@
 export default class SelectRandomCards {
   constructor(defaultCardsArray) {
     this.defaultCardsArray = defaultCardsArray
-    // default level = average (9 cards)
-    this.numberOfCards = 9;
+    
   }
 
-  setLevel(level) {
+  setLevel(level = 'average') {
     switch (level) {
       case 'easy':
         this.numberOfCards = 6;
         break;
+      case 'average':
+        this.numberOfCards = 9;
+        break;
       case 'hard':
         this.numberOfCards = 12;
-        break;
-      default:
-        this.numberOfCards = 9;
         break;
     }
   }

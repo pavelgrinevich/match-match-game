@@ -51,14 +51,14 @@ export default class ControlButtons {
 
   setButtonsAction() {
     this.buttonCardBack.addEventListener('mouseup', () => {
-      if (this.menuСardBack.style.display == 'none') {
+      if (this.menuСardBack.style.display === 'none') {
         this.menuDifficulty.style.display = 'none';
         this.menuСardBack.style.display = 'block';
       } else this.menuСardBack.style.display = 'none';
     })
 
     this.buttonDifficulty.addEventListener('mouseup', () => {
-      if (this.menuDifficulty.style.display == 'none') {
+      if (this.menuDifficulty.style.display === 'none') {
         this.menuСardBack.style.display = 'none';
         this.menuDifficulty.style.display = 'block';
       } else this.menuDifficulty.style.display = 'none';
@@ -82,7 +82,7 @@ export default class ControlButtons {
       this.buttonNewGame.innerHTML = 'Try again';
       this.menuСardBack.style.display = 'none';
       this.menuDifficulty.style.display = 'none';
-      this.callbackControlButtons('LeaveGame');
+      this.callbackControlButtons('leaveGame');
     })
 
     this.buttonRestart.addEventListener('mouseup', () => {

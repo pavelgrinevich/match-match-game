@@ -36,11 +36,20 @@ export default class ControlGameField {
     }
 
     for (let i = 0; i < this.numberOfCards; i++) {
-      const divCardBack = document.createElement('div');
-      this.cardBackItems.push(divCardBack);
-      divCardBack.classList.add('card');
-      divCardBack.style.backgroundImage = `url(${this.cardBack})`;
-      this.playingField.appendChild(divCardBack);
+      const divCardContainer = document.createElement('div');
+      const divCard = document.createElement('div');
+      const divBack = document.createElement('div');
+
+      this.cardBackItems.push(divBack);
+
+      divCardContainer.classList.add('card-container');
+      divCard.classList.add('card');
+      divBack.classList.add('back');
+      divBack.style.backgroundImage = `url(${this.cardBack})`;
+
+      divCard.appendChild(divBack);
+      divCardContainer.appendChild(divCard);
+      this.playingField.appendChild(divCardContainer);
     }
   }
 
@@ -59,8 +68,37 @@ export default class ControlGameField {
   }
 
   createNewGame(cardsArray) {
-    /*while (this.playingField.firstChild) {
+    while (this.playingField.firstChild) {
       this.playingField.removeChild(this.playingField.firstChild);
-    }*/
+    }
+
+    for (let i = 0; i < this.numberOfCards; i++) {
+      const divCardContainer = document.createElement('div');
+      const divCard = document.createElement('div');
+      const divFront = document.createElement('div');
+      const divBack = document.createElement('div');
+
+      this.cardBackItems.push(divBack);
+
+      divCardContainer.classList.add('card-container');
+      divCard.classList.add('card');
+      divFront.classList.add('front');
+      divBack.classList.add('back');
+      divFront.style.backgroundImage = `url(${cardsArray[i]})`;
+      divBack.style.backgroundImage = `url(${this.cardBack})`;
+
+      divCard.appendChild(divFront);
+      divCard.appendChild(divBack);
+      divCardContainer.appendChild(divCard);
+      this.playingField.appendChild(divCardContainer);
+
+      divCard.addEventListener('mouseup', () => {
+        divCard.classList.add('rotate');
+      })
+    }
+  }
+
+  leaveGame() {
+    this.drawPrestartField();
   }
 }
