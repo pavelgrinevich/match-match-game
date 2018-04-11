@@ -17,6 +17,7 @@ import cardBack3 from './images/card-back3.jpg';
 import cardBack4 from './images/card-back4.jpg';
 import cardBack5 from './images/card-back5.jpg';
 
+import MainGameModule from './js/MainGameModule';
 import SelectRandomCards from './js/SelectRandomCards';
 import ControlGameField from './js/ControlGameField';
 import ControlButtons from './js/ControlButtons';
@@ -30,31 +31,35 @@ const config = {
   cardBack: 2,
 }
 
-const gameField = new ControlGameField(config);
-const random = new SelectRandomCards(config.defaultCardsArray);
-
-const callbackControlButtons = (flag, arg) => {
+const callbackControl = (flag, ...args) => {
   switch (flag) {
     case 'changeCardBack':
-      gameField.setCardBack(arg);
+      gameField.setCardBack(...args);
       break;
     case 'changeDifficulty':
-      config.level = arg;
-      gameField.setLevel(arg);
+      gameField.setLevel(...args);
       break;
     case 'newGame':
-      random.setLevel(config.level);
+      random.setLevel();
       gameField.createNewGame(random.getCardsArray());
+      mainControl.start();
       break;
     case 'leaveGame':
       gameField.leaveGame();
+      mainControl.stop();
       break;
     case 'restart':
+      mainControl.stop();
       gameField.createNewGame(random.getCardsArray());
+      mainControl.start();
       break;
-    default:
+    case 'compare':
+      mainControl.compareCards(...args);
       break;
   }
 }
 
-const menu = new ControlButtons(config.cardBackArray, callbackControlButtons);
+const gameField = new ControlGameField(config, callbackControl);
+const menu = new ControlButtons(config, callbackControl);
+const random = new SelectRandomCards(config);
+const mainControl = new MainGameModule(config, callbackControl);

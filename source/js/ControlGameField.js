@@ -1,8 +1,8 @@
 export default class ControlGameField {
-  constructor(config) {
-    this.cardBackArray = config.cardBackArray;
-    this.cardBack = this.cardBackArray[config.cardBack];
-    this.level = config.level;
+  constructor(config, callbackControl) {
+    this.config = config;
+    this.callbackControl = callbackControl;
+    this.cardBack = this.config.cardBackArray[config.cardBack];
 
     this.wrapperClassName = 'match-match-game';
     this.wrapper = document.getElementsByClassName(this.wrapperClassName)[0];
@@ -15,9 +15,9 @@ export default class ControlGameField {
   }
 
   setSizes() {
-    this.wrapper.className = `${this.wrapperClassName} ${this.level}`;
+    this.wrapper.className = `${this.wrapperClassName} ${this.config.level}`;
 
-    switch (this.level) {
+    switch (this.config.level) {
       case 'easy':
         this.numberOfCards = 12;
         break;
@@ -54,13 +54,13 @@ export default class ControlGameField {
   }
 
   setLevel(level) {
-    this.level = level;
+    this.config.level = level;
     this.setSizes();
     this.drawPrestartField();
   }
 
   setCardBack(cardBack) {
-    this.cardBack = this.cardBackArray[cardBack];
+    this.cardBack = this.config.cardBackArray[cardBack];
 
     for (let i = 0; i < this.cardBackItems.length; i++) {
       this.cardBackItems[i].style.backgroundImage = `url(${this.cardBack})`;
@@ -78,8 +78,6 @@ export default class ControlGameField {
       const divFront = document.createElement('div');
       const divBack = document.createElement('div');
 
-      this.cardBackItems.push(divBack);
-
       divCardContainer.classList.add('card-container');
       divCard.classList.add('card');
       divFront.classList.add('front');
@@ -92,9 +90,19 @@ export default class ControlGameField {
       divCardContainer.appendChild(divCard);
       this.playingField.appendChild(divCardContainer);
 
-      divCard.addEventListener('mouseup', () => {
+      const handlerMouseup = () => {
         divCard.classList.add('rotate');
-      })
+        divCard.removeEventListener('mouseup', handlerMouseup);
+        
+        const handlerTransitionend = () => {
+          this.callbackControl('compare', divCard, handlerMouseup);
+          divCard.removeEventListener('transitionend', handlerTransitionend);
+        }
+
+        divCard.addEventListener('transitionend', handlerTransitionend);
+      }
+
+      divCard.addEventListener('mouseup', handlerMouseup);
     }
   }
 

@@ -1,7 +1,7 @@
 export default class ControlButtons {
-  constructor(cardBackArray, callbackControlButtons) {
-    this.callbackControlButtons = callbackControlButtons;
-    this.cardBackArray = cardBackArray;
+  constructor(config, callbackControl) {
+    this.config = config;
+    this.callbackControl = callbackControl;
     this.cardBackDivItems = [];
 
     this.menuWrapper = document.getElementsByClassName('menu-wrapper')[0];
@@ -26,12 +26,12 @@ export default class ControlButtons {
     this.menuСardBack.style.display = 'none';
     this.menuDifficulty.style.display = 'none';
 
-    for (let i = 0, l = this.cardBackArray.length; i < l; i++) {
+    for (let i = 0, l = this.config.cardBackArray.length; i < l; i++) {
       const item = document.createElement('div');
       this.cardBackDivItems.push(item);
       item.id = `${i}`;
       item.className = 'item';
-      item.style.backgroundImage = `url(${this.cardBackArray[i]})`;
+      item.style.backgroundImage = `url(${this.config.cardBackArray[i]})`;
       this.menuСardBack.appendChild(item);
     }
 
@@ -44,7 +44,7 @@ export default class ControlButtons {
         }
 
         this.cardBackDivItems[i].className += ' selected';
-        this.callbackControlButtons('changeCardBack', this.cardBackDivItems[i].id);
+        this.callbackControl('changeCardBack', this.cardBackDivItems[i].id);
       })
     }
   }
@@ -67,14 +67,14 @@ export default class ControlButtons {
     this.buttonDifficultyApply.addEventListener('mouseup', () => {
       for (let i = 0; i < this.inputDifficultyArray.length; i++) {
         if (this.inputDifficultyArray[i].checked) {
-          this.callbackControlButtons('changeDifficulty', this.inputDifficultyArray[i].id);
+          this.callbackControl('changeDifficulty', this.inputDifficultyArray[i].id);
         }
       } 
     })
 
     this.buttonNewGame.addEventListener('mouseup', () => {
       this.menuWrapper.style.display = 'none';
-      this.callbackControlButtons('newGame');
+      this.callbackControl('newGame');
     })
 
     this.buttonLeaveGame.addEventListener('mouseup', () => {
@@ -82,11 +82,11 @@ export default class ControlButtons {
       this.buttonNewGame.innerHTML = 'Try again';
       this.menuСardBack.style.display = 'none';
       this.menuDifficulty.style.display = 'none';
-      this.callbackControlButtons('leaveGame');
+      this.callbackControl('leaveGame');
     })
 
     this.buttonRestart.addEventListener('mouseup', () => {
-      this.callbackControlButtons('restart');
+      this.callbackControl('restart');
     })
   }
 }

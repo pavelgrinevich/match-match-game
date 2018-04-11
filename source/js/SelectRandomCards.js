@@ -1,11 +1,10 @@
 export default class SelectRandomCards {
-  constructor(defaultCardsArray) {
-    this.defaultCardsArray = defaultCardsArray
-    
+  constructor(config) {
+    this.config = config;
   }
 
-  setLevel(level = 'average') {
-    switch (level) {
+  setLevel() {
+    switch (this.config.level) {
       case 'easy':
         this.numberOfCards = 6;
         break;
@@ -19,7 +18,7 @@ export default class SelectRandomCards {
   }
 
   getCardsArray() {
-    let cardsArray = this.defaultCardsArray.slice();
+    let cardsArray = this.config.defaultCardsArray.slice();
     let randomCardsArray = [];
 
     for (let i = 0; i < this.numberOfCards; i++) {
