@@ -28,7 +28,7 @@ const config = {
   // choosing: easy, average or hard
   level: 'average',
   // choosing: from 0 to 5
-  cardBack: 2,
+  cardBack: 0,
 }
 
 const callbackControl = (flag, ...args) => {
@@ -60,6 +60,6 @@ const callbackControl = (flag, ...args) => {
 }
 
 const gameField = new ControlGameField(config, callbackControl);
-const menu = new ControlButtons(config, callbackControl);
+const controlbuttons = new ControlButtons(config, callbackControl);
 const random = new SelectRandomCards(config);
 const mainControl = new MainGameModule(config, callbackControl);

@@ -21,8 +21,8 @@ export default class MainGameModule {
     }
   }
 
-  stop() {
-    if (this.count === this.numberOfCards) console.log('congrats');
+  stop(flag = false) {
+    if (flag) console.log('congrats');
     this.comparedCardsArray = [];
   }
 
@@ -40,9 +40,12 @@ export default class MainGameModule {
         this.comparedCardsArray[0][0].addEventListener('mouseup', this.comparedCardsArray[0][1]);
         this.comparedCardsArray[1][0].addEventListener('mouseup', this.comparedCardsArray[1][1]);
       } else {
-        this.count += 2;
 
-        if (this.count === this.numberOfCards) this.stop();
+        this.comparedCardsArray[0][0].classList.add('hide');
+        this.comparedCardsArray[1][0].classList.add('hide');
+
+        this.count += 2;
+        if (this.count === this.numberOfCards) this.stop(true);
       }
 
       this.comparedCardsArray.splice(0, 2);

@@ -11,13 +11,11 @@ export default class ControlButtons {
     this.buttonNewGame = document.getElementById('button-newgame');
     this.buttonCardBack = document.getElementById('button-cardback');
     this.buttonDifficulty = document.getElementById('button-difficulty');
-    this.buttonDifficultyApply = document.getElementById('button-difficulty-apply');
     this.buttonLeaveGame = document.getElementById('leave-game');
     this.buttonRestart = document.getElementById('restart');
 
-    this.inputDifficultyArray = this.menuDifficulty.getElementsByTagName('input');
-
     this.setFirstSetting();
+    this.setDifficultyButtonsAction();
     this.setButtonsAction();
   }
 
@@ -35,7 +33,7 @@ export default class ControlButtons {
       this.menuСardBack.appendChild(item);
     }
 
-    this.cardBackDivItems[2].className += ' selected';
+    this.cardBackDivItems[this.config.cardBack].className += ' selected';
 
     for (let i = 0; i < this.cardBackDivItems.length; i++) {
       this.cardBackDivItems[i].addEventListener('click', () => {
@@ -49,8 +47,29 @@ export default class ControlButtons {
     }
   }
 
+  setDifficultyButtonsAction() {
+    const difficultyButtons = this.menuDifficulty.childNodes;
+
+    for (let i = 0; i < difficultyButtons.length; i++) {
+      if (this.config.level === difficultyButtons[i].id) difficultyButtons[i].classList.add('active');
+
+      difficultyButtons[i].addEventListener('mouseup', () => {
+        for (let j = 0; j < difficultyButtons.length; j++) {
+          difficultyButtons[j].classList.remove('active');
+        }
+
+        difficultyButtons[i].classList.add('active');
+
+        this.callbackControl('changeDifficulty', difficultyButtons[i].id);
+      })
+    }
+  }
+
   setButtonsAction() {
     this.buttonCardBack.addEventListener('mouseup', () => {
+      this.buttonCardBack.classList.toggle('active');
+      this.buttonDifficulty.classList.remove('active');
+
       if (this.menuСardBack.style.display === 'none') {
         this.menuDifficulty.style.display = 'none';
         this.menuСardBack.style.display = 'block';
@@ -58,18 +77,13 @@ export default class ControlButtons {
     })
 
     this.buttonDifficulty.addEventListener('mouseup', () => {
+      this.buttonDifficulty.classList.toggle('active');
+      this.buttonCardBack.classList.remove('active');
+
       if (this.menuDifficulty.style.display === 'none') {
         this.menuСardBack.style.display = 'none';
         this.menuDifficulty.style.display = 'block';
       } else this.menuDifficulty.style.display = 'none';
-    })
-
-    this.buttonDifficultyApply.addEventListener('mouseup', () => {
-      for (let i = 0; i < this.inputDifficultyArray.length; i++) {
-        if (this.inputDifficultyArray[i].checked) {
-          this.callbackControl('changeDifficulty', this.inputDifficultyArray[i].id);
-        }
-      } 
     })
 
     this.buttonNewGame.addEventListener('mouseup', () => {

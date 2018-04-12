@@ -92,6 +92,14 @@ button:active {
     box-shadow: 0 .1vh .1vh rgba(0, 0, 0, .3) inset;
 }
 
+button.active {
+    background: rgb(34, 34, 34);
+    position: relative;
+    top: 1px;
+    text-shadow: none;
+    box-shadow: 0 .1vh .1vh rgba(0, 0, 0, .3) inset;
+}
+
 div.playing-field {
     width: 100%;
     height: 94%;
@@ -129,7 +137,8 @@ div.card {
     width: 100%;
     height: 100%;
     transition: .8s;
-    transform-style: preserve-3d; 
+    transform-style: preserve-3d;
+    box-shadow: inset -.2vh .2vh .5vh rgba(37, 48, 58, .5), -.1vh .1vh .5vh rgba(205, 230, 249, 1);
 }
 
 div.rotate {
@@ -164,6 +173,12 @@ div.card .back:hover {
 
 div.card .front {
     transform: rotateY(180deg);
+    transition-property: opacity;
+    transition-duration: .8s;
+}
+
+div.hide .front {
+    opacity: 0;
 }
 
 div.menu-wrapper {
@@ -244,28 +259,11 @@ div.difficulty {
     width: 100%;
     height: 24vh;
     background-color: rgb(0, 0, 0);
-}
-
-div.difficulty .radio {
-    margin-left: 3vh;
-}
-
-div.difficulty input {
-    outline: none;
-    width: 2vh;
-    height: 2vh;
-    margin: 0 0 0 .25vh;
-    padding: 0;
-}
-
-div.difficulty label {
-    cursor: pointer;
-    margin-right: 5vh;
+    text-align: center;
 }
 
 div.difficulty button {
-    cursor: pointer;
-    display: block;
+    height: 5vh;
+    width: 30%;
     margin-top: 2vh;
 }
-
