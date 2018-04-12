@@ -94,8 +94,13 @@ export default class ControlButtons {
     this.buttonLeaveGame.addEventListener('mouseup', () => {
       this.menuWrapper.style.display = 'block';
       this.buttonNewGame.innerHTML = 'Try again';
+
       this.menuСardBack.style.display = 'none';
+      this.buttonCardBack.classList.remove('active');
+
       this.menuDifficulty.style.display = 'none';
+      this.buttonDifficulty.classList.remove('active');
+      
       this.callbackControl('leaveGame');
     })
 

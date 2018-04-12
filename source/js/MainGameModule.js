@@ -4,7 +4,46 @@ export default class MainGameModule {
     this.callbackControl = callbackControl;
     this.comparedCardsArray = [];
 
+    this.renderTimer;
+    this.time = '00:00:00';
+
+    this.canvasTimer = document.getElementsByTagName('canvas')[0].getContext('2d');
+    this.canvasTimer.fillStyle = 'rgb(255, 255, 255)';
+    this.canvasTimer.font = 'bold 27px arial, helvetica, sans-serif';
+    this.canvasTimer.fillText(this.time, 10, 30);
+
     this.count = 0;
+  }
+
+  setTimer(flag = 'stop') {
+    window.cancelAnimationFrame(this.renderTimer);
+
+    if (flag === 'start') {
+      let startDate = new Date();
+
+      const calcTimer = () => {
+        let newDate = new Date() - startDate;
+
+        let ms = Math.abs(Math.floor(newDate/10)%100);
+        let sec = Math.abs(Math.floor(newDate/1000)%60);
+        let min = Math.abs(Math.floor(newDate/1000/60)%60);
+
+        if (ms.toString().length === 1) ms = '0' + ms;
+        if (sec.toString().length === 1) sec = '0' + sec;
+        if (min.toString().length === 1) min = '0' + min;
+        
+        if (+min > 90) startDate = new Date();
+
+        this.time = `${min}:${sec}:${ms}`
+
+        this.canvasTimer.clearRect(0, 0, 120, 40);
+        this.canvasTimer.fillText(this.time, 10, 30);
+
+        this.renderTimer = window.requestAnimationFrame(calcTimer);
+      }
+
+      this.renderTimer = window.requestAnimationFrame(calcTimer);
+    }
   }
 
   start() {
@@ -19,11 +58,17 @@ export default class MainGameModule {
         this.numberOfCards = 24;
         break;
     }
+
+    this.setTimer('start');
   }
 
   stop(flag = false) {
-    if (flag) console.log('congrats');
+    this.setTimer('stop');
     this.comparedCardsArray = [];
+    
+    if (flag) { 
+      alert(`Your time: ${this.time}`);
+    }
   }
 
   compareCards(card, handlerMouseup) {

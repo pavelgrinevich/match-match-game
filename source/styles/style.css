@@ -53,8 +53,11 @@ div.timer {
     padding-right: 1vh;
     border-radius: .5vh;
     background: linear-gradient(to right, rgb(129, 168, 203), rgb(34, 34, 34));
-    font: bold 2.2vh arial, helvetica, sans-serif;
-    color: rgb(255, 255, 255); 
+}
+
+canvas {
+    width: 11vh;
+    height: 3.5vh;
 }
 
 button {
@@ -115,6 +118,7 @@ div.card-container {
     border: 0;
     border-radius: .5vh;
     perspective: 1000;
+    box-shadow: inset -.2vh .2vh .5vh rgba(37, 48, 58, .5), -.1vh .1vh .5vh rgba(205, 230, 249, 1);
 }
 
 div.easy .card-container {
@@ -138,7 +142,6 @@ div.card {
     height: 100%;
     transition: .8s;
     transform-style: preserve-3d;
-    box-shadow: inset -.2vh .2vh .5vh rgba(37, 48, 58, .5), -.1vh .1vh .5vh rgba(205, 230, 249, 1);
 }
 
 div.rotate {
