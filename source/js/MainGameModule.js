@@ -31,8 +31,6 @@ export default class MainGameModule {
         if (ms.toString().length === 1) ms = '0' + ms;
         if (sec.toString().length === 1) sec = '0' + sec;
         if (min.toString().length === 1) min = '0' + min;
-        
-        if (+min > 90) startDate = new Date();
 
         this.time = `${min}:${sec}:${ms}`
 
@@ -65,8 +63,10 @@ export default class MainGameModule {
   stop(flag = false) {
     this.setTimer('stop');
     this.comparedCardsArray = [];
+    this.count = 0;
     
-    if (flag) { 
+    if (flag) {
+      this.callbackControl('finish', this.time);
       alert(`Your time: ${this.time}`);
     }
   }

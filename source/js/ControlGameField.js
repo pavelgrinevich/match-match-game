@@ -2,7 +2,7 @@ export default class ControlGameField {
   constructor(config, callbackControl) {
     this.config = config;
     this.callbackControl = callbackControl;
-    this.cardBack = this.config.cardBackArray[config.cardBack];
+    this.cardBack = this.config.cardBackArray[this.config.cardBack];
 
     this.wrapperClassName = 'match-match-game';
     this.wrapper = document.getElementsByClassName(this.wrapperClassName)[0];
@@ -53,14 +53,13 @@ export default class ControlGameField {
     }
   }
 
-  setLevel(level) {
-    this.config.level = level;
+  setLevel() {
     this.setSizes();
     this.drawPrestartField();
   }
 
-  setCardBack(cardBack) {
-    this.cardBack = this.config.cardBackArray[cardBack];
+  setCardBack() {
+    this.cardBack = this.config.cardBackArray[this.config.cardBack];
 
     for (let i = 0; i < this.cardBackItems.length; i++) {
       this.cardBackItems[i].style.backgroundImage = `url(${this.cardBack})`;

@@ -7,22 +7,27 @@
 <body>
     <div class="match-match-game hard">
         <div class="field-control">
-            <button id="leave-game">leave game</button>
-            <button id="restart">restart</button>
+            <button id="field-leavegame">leave game</button>
+            <button id="field-restart">restart</button>
             <div class="timer">
                 <canvas width="120px" height="40px"></canvas>
             </div>
         </div>
         <div class="playing-field"></div>
         <div class="menu-wrapper">
-            <div class="menu">
-                <div class="menu-control">
-                    <button id="button-newgame">Start game</button><br />
-                    <button id="button-cardback">Change card back</button>
-                    <button id="button-difficulty">Change difficulty</button>
+            <div class="intro">
+                <div class="registration">
+                    <p>Welcome to the match-match game!</p>
+                    <p>Please, fill in the information below (stored only on your device):</p>
+                    <input id="firstname" type="text" placeholder="First Name *">
+                    <input id="lastname" type="text" placeholder="Last Name">
+                    <input id="email" type="email" id="" placeholder="Email">
+                    <p>Or select past logs from the list:</p>
+                    <select id="past-profiles"></select>
+                    <button id="intro-apply">apply</button>
                 </div>
                 <div class="description">
-                    <p>Rules</p>
+                    <p>Rules of the game:</p>
                     <ul>
                         <li>When the game starts, all cards are hidden</li>
                         <li>Your task is to find all the matchs, choosing two cards per turn</li>
@@ -30,8 +35,53 @@
                     </ul>
                     <p>Control: mouse</p>
                 </div>
+            </div>
+            <div class="menu">
+                <div class="menu-control">
+                    <button id="main-newgame">New game!</button><br />
+                    <button id="main-cardback">Change card back</button>
+                    <button id="main-difficulty">Change difficulty</button>
+                </div>
                 <div class="card-back"></div>
                 <div class="difficulty"><button id="easy">Easy (4x3)</button><button id="average">Average (6x3)</button><button id="hard">Hard (6x4)</button></div>
+                <div class="rating">
+                    <table>
+                        <tr><td class="solid"></td><td class="solid">top10</td><td class="solid"></td><td class="solid">score</td></tr>
+                        <tr><td>1</td><td>Player1dsfgsd</td><td class="dotted"></td><td>10900</td></tr>
+                        <tr><td>2</td><td>Player1sdf</td><td class="dotted"></td><td>4400</td></tr>
+                        <tr><td>3</td><td>Player1</td><td class="dotted"></td><td>4100</td></tr>
+                        <tr><td>4</td><td>Player1</td><td class="dotted"></td><td>4100</td></tr>
+                        <tr><td>5</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>6</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>7</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>8</td><td>Player1sdfsdfsdfsdf</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>9</td><td>Player1</td><td class="dotted"></td><td>400</td></tr>
+                        <tr><td>10</td><td>Player1</td><td class="dotted"></td><td>400</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="finish">
+                <div class="congrats">
+                    <p>Congratulations! You got 40000 points and took 344th place.</p>
+                    <p>Your time: хх.хх.хх. It took you 40 steps.</p>
+                    <button id="finish-menu">menu</button>
+                    <button id="finish-restart">restart</button>
+                </div>
+                <div class="rating">
+                    <table>
+                        <tr><td class="solid"></td><td class="solid">top10</td><td class="solid"></td><td class="solid">score</td></tr>
+                        <tr><td>1</td><td>Player1dsfgsd</td><td class="dotted"></td><td>10900</td></tr>
+                        <tr><td>2</td><td>Player1sdf</td><td class="dotted"></td><td>4400</td></tr>
+                        <tr><td>3</td><td>Player1</td><td class="dotted"></td><td>4100</td></tr>
+                        <tr><td>4</td><td>Player1</td><td class="dotted"></td><td>4100</td></tr>
+                        <tr><td>5</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>6</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>7</td><td>Player1</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>8</td><td>Player1sdfsdfsdfsdf</td><td class="dotted"></td><td>4010</td></tr>
+                        <tr><td>9</td><td>Player1</td><td class="dotted"></td><td>400</td></tr>
+                        <tr><td>10</td><td>Player1</td><td class="dotted"></td><td>400</td></tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
