@@ -10,7 +10,7 @@ export default class IntroMenu {
     this.selectPastProfiles = document.getElementById('past-profiles'); 
     this.buttonApply = document.getElementById('intro-apply');
 
-    this.pastProfilesObj = JSON.parse(window.localStorage.getItem('pastLogs'));
+    this.pastProfilesObj = JSON.parse(window.localStorage.getItem('pastProfiles'));
 
     this.fillPastProfilesSelect();
     this.setIntroMenuAction();
@@ -62,7 +62,7 @@ export default class IntroMenu {
         this.pastProfilesObj[this.inputFirstName.value] = profileArray;
         this.config.profile = profileArray;
 
-        window.localStorage.setItem('pastLogs', JSON.stringify(this.pastProfilesObj));
+        window.localStorage.setItem('pastProfiles', JSON.stringify(this.pastProfilesObj));
         this.callback(this.ctx, 'applyProfile');
       }
     })

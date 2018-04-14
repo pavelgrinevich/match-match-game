@@ -1,9 +1,12 @@
 export default class DrawingMenu {
-  constructor() {
+  constructor(config) {
+    this.config = config;
+
     this.menuWrapper = document.getElementsByClassName('menu-wrapper')[0];
     this.introMenu = document.getElementsByClassName('intro')[0];
     this.mainMenu = document.getElementsByClassName('menu')[0];
-    this.finishMenu = document.getElementsByClassName('finish')[0];
+    this.menuControl = document.getElementsByClassName('menu-control')[0];
+    this.menuCongrats = document.getElementsByClassName('menu-congrats')[0];
     this.cardBackSelect = document.getElementsByClassName('card-back')[0];
     this.difficultySelect = document.getElementsByClassName('difficulty')[0];
     this.ratingTable = document.getElementsByClassName('rating')[0];
@@ -20,8 +23,11 @@ export default class DrawingMenu {
       case 'mainMenu':
         this.mainMenu.style.display = 'block';
         break;
-      case 'finishMenu':
-        this.finishMenu.style.display = 'block';
+      case 'menuControl':
+        this.menuControl.style.display = 'block';
+        break;
+      case 'menuCongrats':
+        this.menuCongrats.style.display = 'block';
         break;
       case 'cardBackSelect':
         this.cardBackSelect.style.display = 'block';
@@ -48,8 +54,11 @@ export default class DrawingMenu {
       case 'mainMenu':
         this.mainMenu.style.display = 'none';
         break;
-      case 'finishMenu':
-        this.finishMenu.style.display = 'none';
+      case 'menuControl':
+        this.menuControl.style.display = 'none';
+        break;
+      case 'menuCongrats':
+        this.menuCongrats.style.display = 'none';
         break;
       case 'cardBackSelect':
         this.cardBackSelect.style.display = 'none';
@@ -67,26 +76,36 @@ export default class DrawingMenu {
 
   showIntro() {
     this.hide('mainMenu')
-      .hide('finishMenu')
       .show('menuWrapper')
       .show('introMenu');
   }
 
   showMain() {
+    if (this.ratingTable.firstChild) this.ratingTable.removeChild(this.ratingTable.firstChild);
+    this.ratingTable.appendChild(this.config.ratingList);
+
     this.hide('introMenu')
-      .hide('finishMenu')
+      .hide('menuCongrats')
       .hide('cardBackSelect')
       .hide('difficultySelect')
       .show('menuWrapper')
       .show('mainMenu')
+      .show('menuControl')
       .show('ratingTable');
   }
 
   showFinish() {
+    if (this.ratingTable.firstChild) this.ratingTable.removeChild(this.ratingTable.firstChild);
+    this.ratingTable.appendChild(this.config.ratingList);
+
     this.hide('introMenu')
-      .hide('mainMenu')
+      .hide('menuControl')
+      .hide('cardBackSelect')
+      .hide('difficultySelect')
       .show('menuWrapper')
-      .show('finishMenu');
+      .show('mainMenu')
+      .show('menuCongrats')
+      .show('ratingTable');
   }
 
   showRatingTable() {

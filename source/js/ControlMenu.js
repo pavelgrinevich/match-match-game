@@ -9,11 +9,11 @@ export default class ControlMenu {
     this.config = config;
     this.callbackControl = callbackControl;
 
-    this.drawing = new DrawingMenu();
+    this.drawing = new DrawingMenu(this.config);
     this.introMenu = new IntroMenu(this.config, this.handleAction, this);
     this.mainMenu = new MainMenu(this.config, this.handleAction, this);
     this.fieldButtons = new FieldButtons(this.handleAction, this);
-    this.finishMenu = new FinishMenu();
+    this.finishMenu = new FinishMenu(this.handleAction, this);
 
     this.drawing.showIntro();
   }
@@ -42,12 +42,19 @@ export default class ControlMenu {
       case 'applyProfile':
         ctx.drawing.showMain();
         break;
-      case 'leaveGame':
+      case 'mainMenu':
         ctx.drawing.showMain();
+        ctx.callbackControl('mainMenu');
         break;
       case 'restart':
-        ctx.callbackControl('newGame');
+        ctx.drawing.hideAll();
+        ctx.callbackControl('restart');
         break;
     }
+  }
+
+  showFinish(finishObj) {
+    this.finishMenu.addData(finishObj);
+    this.drawing.showFinish();
   }
 }

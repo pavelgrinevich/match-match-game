@@ -18,6 +18,8 @@ export default class SelectRandomCards {
   }
 
   getCardsArray() {
+    this.setLevel();
+    
     let cardsArray = this.config.defaultCardsArray.slice();
     let randomCardsArray = [];
 

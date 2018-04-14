@@ -11,7 +11,7 @@ export default class FieldButtons {
 
   setButtonsAction() {
     this.buttonLeaveGame.addEventListener('mouseup', () => {
-      this.callback(this.ctx, 'leaveGame');
+      this.callback(this.ctx, 'mainMenu');
     })
 
     this.buttonRestart.addEventListener('mouseup', () => {

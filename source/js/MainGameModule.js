@@ -12,7 +12,8 @@ export default class MainGameModule {
     this.canvasTimer.font = 'bold 27px arial, helvetica, sans-serif';
     this.canvasTimer.fillText(this.time, 10, 30);
 
-    this.count = 0;
+    this.countOfGuessedCards = 0;
+    this.countOfSteps = 0;
   }
 
   setTimer(flag = 'stop') {
@@ -63,16 +64,23 @@ export default class MainGameModule {
   stop(flag = false) {
     this.setTimer('stop');
     this.comparedCardsArray = [];
-    this.count = 0;
+    this.countOfGuessedCards = 0;
     
     if (flag) {
-      this.callbackControl('finish', this.time);
-      alert(`Your time: ${this.time}`);
+      let finishObj = {
+        numberOfCards: this.numberOfCards,
+        countOfSteps: this.countOfSteps,
+        time: this.time,
+      };
+      
+      this.callbackControl('finish', finishObj);
     }
   }
 
   compareCards(card, handlerMouseup) {
     this.comparedCardsArray.push([card, handlerMouseup]);
+
+    this.countOfSteps += 1;
 
     if (this.comparedCardsArray.length >= 2) {
       if (
@@ -89,8 +97,8 @@ export default class MainGameModule {
         this.comparedCardsArray[0][0].classList.add('hide');
         this.comparedCardsArray[1][0].classList.add('hide');
 
-        this.count += 2;
-        if (this.count === this.numberOfCards) this.stop(true);
+        this.countOfGuessedCards += 2;
+        if (this.countOfGuessedCards === this.numberOfCards) this.stop(true);
       }
 
       this.comparedCardsArray.splice(0, 2);

@@ -20,8 +20,8 @@ import cardBack5 from './images/card-back5.jpg';
 import ControlMenu from './js/ControlMenu';
 import MainGameModule from './js/MainGameModule';
 import SelectRandomCards from './js/SelectRandomCards';
+import RatingList from './js/RatingList';
 import ControlGameField from './js/ControlGameField';
-
 
 const config = {
   defaultCardsArray: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12],
@@ -31,7 +31,7 @@ const config = {
   // choosing: from 0 to 5
   cardBack: 0,
   profile: [],
-  ratingList: {},
+  ratingList: [],
 }
 
 const callbackControl = (flag, ...args) => {
@@ -39,7 +39,6 @@ const callbackControl = (flag, ...args) => {
     case 'intro':
       mainMenu.show();
       break;
-
     case 'changeCardBack':
       gameField.setCardBack();
       break;
@@ -47,11 +46,10 @@ const callbackControl = (flag, ...args) => {
       gameField.setLevel();
       break;
     case 'newGame':
-      random.setLevel();
       gameField.createNewGame(random.getCardsArray());
       mainControl.start();
       break;
-    case 'leaveGame':
+    case 'mainMenu':
       gameField.leaveGame();
       mainControl.stop();
       break;
@@ -64,50 +62,14 @@ const callbackControl = (flag, ...args) => {
       mainControl.compareCards(...args);
       break;
     case 'finish':
-      
+      ratingList.addNewScore(...args);
+      controlMenu.showFinish(...args);
       break;
   }
 }
 
-
-
-
+const ratingList = new RatingList(config);
+const random = new SelectRandomCards(config);
 const controlMenu = new ControlMenu(config, callbackControl);
 const gameField = new ControlGameField(config, callbackControl);
-const random = new SelectRandomCards(config);
 const mainControl = new MainGameModule(config, callbackControl);
-
-
-
-  /*
-  const obj = {
-	item1: 1,
-	item2: [123, "two", 3.0],
-	item3:"hello"
-};
-
-const serialObj = JSON.stringify(obj);
-window.localStorage.setItem("myKey", serialObj);
-
-window.localStorage.removeItem("myKey");
-window.localStorage.clear()
-
-window.localStorage.setItem("myKey", serialObj);
-
-const returnObj = JSON.parse(window.localStorage.getItem("myKey")\
-  
-  getRatingList() {
-    const ratingList = JSON.parse(window.localStorage.getItem("myKey"))
-  }
-
-  saveData(firstname, lastname, email) {
-    const obj = {
-      item1: 1,
-      item2: [123, "two", 3.0],
-      item3:"hello"
-    };
-    
-    const serialObj = JSON.stringify(obj);
-    
-    window.localStorage.setItem("myKey", serialObj);
-  }*/

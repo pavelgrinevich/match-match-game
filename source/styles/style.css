@@ -274,6 +274,14 @@ div.menu-control {
     text-align: center;
 }
 
+div.menu-congrats {
+    position: relative;
+    top: 2vh;
+    left: 2vh;
+    width: 100%;
+    text-align: center;
+}
+
 div.menu-control button {
     height: 5vh;
     width: 30%;
@@ -346,24 +354,6 @@ div.rating td.dotted {
     border-bottom: .1vh white dotted;
 }
 
-div.rating td.solid {
+div.rating th {
     border-bottom: .1vh white solid;
-}
-
-div.finish {
-    position: relative;
-    width: 70vh;
-    height: 50vh;
-    margin: 10vh auto;
-    background-color: rgb(0, 0, 0);
-    font: normal 2.2vh arial, helvetica, sans-serif;
-    color: rgb(255, 255, 255);
-}
-
-div.congrats {
-    position: relative;
-    top: 2vh;
-    left: 2vh;
-    width: 100%;
-    text-align: center;
 }
