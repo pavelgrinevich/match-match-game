@@ -8,27 +8,34 @@ export default class RatingList {
     this.createRatingTable();
   }
 
-  addNewScore(finishObj) {
-    let score = 0;
+  calcScore() {
+    const numberOfCards = this.config.numberOfCards;
+    const countOfSteps = this.config.countOfSteps;
+    const timeArr = this.config.time.split(':');
+    // this number just looks good :)
+    let score = 100000;
 
-    const timeArr = finishObj.time.split(':');
-    score = Number(timeArr[0]) * 60 * 100 + Number(timeArr[1]) * 100 + Number(timeArr[2]);
-    
-    score = Math.floor(score / (finishObj.numberOfCards + 3));
-    score = score * Math.floor(finishObj.countOfSteps / (finishObj.numberOfCards + 3));
+    score = score / (Number(timeArr[0]) * 60 * 100 + Number(timeArr[1]) * 100 + Number(timeArr[2]));
 
-    finishObj.score = score;
+    score = score * (numberOfCards);
+    score = score / (countOfSteps / numberOfCards);
+
+    this.config.score = Math.floor(score);
+  }
+
+  addNewScore() {
+    this.calcScore();
     
     for (let i = 0; i <= this.ratingList.length; i++) {
       if (!this.ratingList[i]) {
-        this.ratingList.push([this.config.profile[0], score]);
-        finishObj.place = i + 1;
+        this.ratingList.push([this.config.profile[0], this.config.score]);
+        this.config.place = i + 1;
         break;
       }
 
-      if (score > this.ratingList[i][1]) {
-        this.ratingList.splice(i, 0, [this.config.profile[0], score]);
-        finishObj.place = i + 1; 
+      if (this.config.score > this.ratingList[i][1]) {
+        this.ratingList.splice(i, 0, [this.config.profile[0], this.config.score]);
+        this.config.place = i + 1; 
         break;
       }
     }
@@ -69,11 +76,11 @@ export default class RatingList {
           if (j === 3) tableCol.innerHTML = 'none';
           tableCol.style.color = 'rgba(255, 255, 255, .3)';
         }
-          
+
         tableRow.appendChild(tableCol);
       }
     }
     
-    this.config.ratingList = ratingTable;
+    this.config.ratingTable = ratingTable;
   }
 }

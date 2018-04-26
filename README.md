@@ -1,5 +1,7 @@
 ### Match-Match Game 
 
+to the start game: https://match-match-game.netlify.com/
+
 task: https://github.com/rolling-scopes-school/tasks/blob/2018-Q1/tasks/match-match-game.md
 
 ### Requirements

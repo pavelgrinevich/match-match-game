@@ -185,6 +185,7 @@ div.hide .front {
 }
 
 div.menu-wrapper {
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -351,9 +352,9 @@ div.rating td {
 
 div.rating td.dotted {
     width: 100%;
-    border-bottom: .1vh white dotted;
+    border-bottom: .1vh rgba(255, 255, 255, .3) dotted;
 }
 
 div.rating th {
-    border-bottom: .1vh white solid;
+    border-bottom: .1vh rgb(255, 255, 255) solid;
 }

@@ -2,14 +2,14 @@ export default class DrawingMenu {
   constructor(config) {
     this.config = config;
 
-    this.menuWrapper = document.getElementsByClassName('menu-wrapper')[0];
-    this.introMenu = document.getElementsByClassName('intro')[0];
-    this.mainMenu = document.getElementsByClassName('menu')[0];
-    this.menuControl = document.getElementsByClassName('menu-control')[0];
-    this.menuCongrats = document.getElementsByClassName('menu-congrats')[0];
-    this.cardBackSelect = document.getElementsByClassName('card-back')[0];
-    this.difficultySelect = document.getElementsByClassName('difficulty')[0];
-    this.ratingTable = document.getElementsByClassName('rating')[0];
+    this.menuWrapper = document.querySelector('.menu-wrapper');
+    this.introMenu = document.querySelector('.intro');
+    this.mainMenu = document.querySelector('.menu');
+    this.menuControl = document.querySelector('.menu-control');
+    this.menuCongrats = document.querySelector('.menu-congrats');
+    this.cardBackSelect = document.querySelector('.card-back');
+    this.difficultySelect = document.querySelector('.difficulty');
+    this.ratingTable = document.querySelector('.rating');
   }
 
   show(flag) {
@@ -82,7 +82,7 @@ export default class DrawingMenu {
 
   showMain() {
     if (this.ratingTable.firstChild) this.ratingTable.removeChild(this.ratingTable.firstChild);
-    this.ratingTable.appendChild(this.config.ratingList);
+    this.ratingTable.appendChild(this.config.ratingTable);
 
     this.hide('introMenu')
       .hide('menuCongrats')
@@ -96,7 +96,7 @@ export default class DrawingMenu {
 
   showFinish() {
     if (this.ratingTable.firstChild) this.ratingTable.removeChild(this.ratingTable.firstChild);
-    this.ratingTable.appendChild(this.config.ratingList);
+    this.ratingTable.appendChild(this.config.ratingTable);
 
     this.hide('introMenu')
       .hide('menuControl')

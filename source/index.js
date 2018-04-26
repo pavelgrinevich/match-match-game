@@ -17,59 +17,72 @@ import cardBack3 from './images/card-back3.jpg';
 import cardBack4 from './images/card-back4.jpg';
 import cardBack5 from './images/card-back5.jpg';
 
-import ControlMenu from './js/ControlMenu';
-import MainGameModule from './js/MainGameModule';
-import SelectRandomCards from './js/SelectRandomCards';
+import MenuControl from './js/MenuControl';
+import MainControl from './js/MainControl';
+import RandomCards from './js/RandomCards';
 import RatingList from './js/RatingList';
-import ControlGameField from './js/ControlGameField';
+import DrawingGame from './js/DrawingGame';
 
-const config = {
-  defaultCardsArray: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12],
-  cardBackArray: [cardBack1, cardBack2, cardBack3, cardBack4, cardBack5],
-  // choosing: easy, average or hard
-  level: 'average',
-  // choosing: from 0 to 5
-  cardBack: 0,
-  profile: [],
-  ratingList: [],
-}
-
-const callbackControl = (flag, ...args) => {
+const callbackControl = (flag) => {
   switch (flag) {
-    case 'intro':
-      mainMenu.show();
+    case 'mainMenu':
+      gameField.drawNewGameField();
+      mainControl.stopGame();
+      break;
+    case 'finish':
+      ratingList.addNewScore();
+      menu.showFinish();
       break;
     case 'changeCardBack':
       gameField.setCardBack();
       break;
     case 'changeDifficulty':
-      gameField.setLevel();
+      gameField.drawNewGameField();
       break;
     case 'newGame':
-      gameField.createNewGame(random.getCardsArray());
-      mainControl.start();
-      break;
-    case 'mainMenu':
-      gameField.leaveGame();
-      mainControl.stop();
+      gameField.drawNewGameField(randomCards.getRandomCardsArray());
+      mainControl.startNewGame();
       break;
     case 'restart':
-      mainControl.stop();
-      gameField.createNewGame(random.getCardsArray());
-      mainControl.start();
-      break;
-    case 'compare':
-      mainControl.compareCards(...args);
-      break;
-    case 'finish':
-      ratingList.addNewScore(...args);
-      controlMenu.showFinish(...args);
+      mainControl.stopGame();
+      gameField.drawNewGameField(randomCards.getRandomCardsArray());
+      mainControl.startNewGame();
       break;
   }
 }
 
+const config = {
+  callbackControl,
+  defaultCardsArray: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12],
+  cardBackArray: [cardBack1, cardBack2, cardBack3, cardBack4, cardBack5],
+  // choosing: from 0 to 5 (number of items of cardBackArray)
+  cardBack: 0,
+  // choosing: easy, average or hard
+  level: 'average',
+  profile: [],
+  ratingTable: [],
+  time: '00:00:00',
+  countOfSteps: 0,
+  score: 0,
+  place: 0,
+
+  get numberOfCards() {
+    switch (this.level) {
+      case 'easy':
+        return 12;
+        break;
+      case 'average':
+        return 18;
+        break;
+      case 'hard':
+        return 24;
+        break;
+    }
+  },
+}
+
+const menu = new MenuControl(config);
 const ratingList = new RatingList(config);
-const random = new SelectRandomCards(config);
-const controlMenu = new ControlMenu(config, callbackControl);
-const gameField = new ControlGameField(config, callbackControl);
-const mainControl = new MainGameModule(config, callbackControl);
+const randomCards = new RandomCards(config);
+const gameField = new DrawingGame(config);
+const mainControl = new MainControl(config);

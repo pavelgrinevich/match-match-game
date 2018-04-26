@@ -1,18 +1,17 @@
 export default class MainMenu {
-  constructor(config, callback, ctx) {
+  constructor(config, callback) {
     this.config = config;
     this.callback = callback;
-    this.ctx = ctx;
 
-    this.cardBackSelect = document.getElementsByClassName('card-back')[0];
+    this.cardBackSelect = document.querySelector('.card-back');
 
-    this.buttonNewGame = document.getElementById('main-newgame');
-    this.buttonCardBack = document.getElementById('main-cardback');
-    this.buttonDifficulty = document.getElementById('main-difficulty');
+    this.buttonNewGame = document.querySelector('#main-newgame');
+    this.buttonCardBack = document.querySelector('#main-cardback');
+    this.buttonDifficulty = document.querySelector('#main-difficulty');
 
-    this.buttonEasy = document.getElementById('easy');
-    this.buttonAverage = document.getElementById('average');
-    this.buttonHard = document.getElementById('hard');
+    this.buttonEasy = document.querySelector('#easy');
+    this.buttonAverage = document.querySelector('#average');
+    this.buttonHard = document.querySelector('#hard');
 
     this.setButtonNewGameAction();
     this.setButtonChangeCardBackAction();
@@ -23,7 +22,7 @@ export default class MainMenu {
 
   setButtonNewGameAction() {
     this.buttonNewGame.addEventListener('mouseup', () => {
-      this.callback(this.ctx, 'newGame');
+      this.callback('newGame');
       this.buttonCardBack.classList.remove('active');
       this.buttonDifficulty.classList.remove('active');
     })
@@ -34,12 +33,12 @@ export default class MainMenu {
       if (this.buttonCardBack.classList.contains('active')) {
         this.buttonCardBack.classList.remove('active');
 
-        this.callback(this.ctx, 'ratingTable');
+        this.callback('ratingTable');
       } else {
         this.buttonDifficulty.classList.remove('active');
         this.buttonCardBack.classList.add('active');
 
-        this.callback(this.ctx, 'cardBackSelect');
+        this.callback('cardBackSelect');
       }
     })
   }
@@ -49,12 +48,12 @@ export default class MainMenu {
       if (this.buttonDifficulty.classList.contains('active')) {
         this.buttonDifficulty.classList.remove('active');
 
-        this.callback(this.ctx, 'ratingTable');
+        this.callback('ratingTable');
       } else {
         this.buttonCardBack.classList.remove('active');
         this.buttonDifficulty.classList.add('active');
 
-        this.callback(this.ctx, 'difficultySelect');
+        this.callback('difficultySelect');
       }
     })
   }
@@ -79,7 +78,7 @@ export default class MainMenu {
 
       this.config.level = 'easy';
 
-      this.callback(this.ctx, 'changeDifficulty');
+      this.callback('changeDifficulty');
     });
 
     this.buttonAverage.addEventListener('mouseup', () => {
@@ -89,7 +88,7 @@ export default class MainMenu {
 
       this.config.level = 'average';
 
-      this.callback(this.ctx, 'changeDifficulty');
+      this.callback('changeDifficulty');
     });
 
     this.buttonHard.addEventListener('mouseup', () => {
@@ -99,7 +98,7 @@ export default class MainMenu {
 
       this.config.level = 'hard';
 
-      this.callback(this.ctx, 'changeDifficulty');
+      this.callback('changeDifficulty');
     });
   }
 
@@ -126,7 +125,7 @@ export default class MainMenu {
         cardBackItems[i].classList.add('selected');
         this.config.cardBack = i;
 
-        this.callback(this.ctx, 'changeCardBack');
+        this.callback('changeCardBack');
       })
     }
   }

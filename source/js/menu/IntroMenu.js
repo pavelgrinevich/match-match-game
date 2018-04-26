@@ -1,14 +1,13 @@
 export default class IntroMenu {
-  constructor(config, callback, ctx) {
+  constructor(config, callback) {
     this.config = config;
     this.callback = callback;
-    this.ctx = ctx;
 
-    this.inputFirstName = document.getElementById('firstname');
-    this.inputLastName = document.getElementById('lastname');
-    this.inputEmail = document.getElementById('email'); 
-    this.selectPastProfiles = document.getElementById('past-profiles'); 
-    this.buttonApply = document.getElementById('intro-apply');
+    this.inputFirstName = document.querySelector('#firstname');
+    this.inputLastName = document.querySelector('#lastname');
+    this.inputEmail = document.querySelector('#email'); 
+    this.selectPastProfiles = document.querySelector('#past-profiles'); 
+    this.buttonApply = document.querySelector('#intro-apply');
 
     this.pastProfilesObj = JSON.parse(window.localStorage.getItem('pastProfiles'));
 
@@ -48,7 +47,7 @@ export default class IntroMenu {
     })
   }
 
-  setButtonsAction(config, callback) {
+  setButtonsAction() {
     this.buttonApply.addEventListener('mouseup', () => {
       if (this.inputFirstName.value === '') {
         this.inputFirstName.style.border = '.3vh rgb(255, 0, 0) solid';
@@ -63,7 +62,7 @@ export default class IntroMenu {
         this.config.profile = profileArray;
 
         window.localStorage.setItem('pastProfiles', JSON.stringify(this.pastProfilesObj));
-        this.callback(this.ctx, 'applyProfile');
+        this.callback('applyProfile');
       }
     })
   }
